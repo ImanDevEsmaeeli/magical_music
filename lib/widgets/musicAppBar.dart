@@ -9,8 +9,8 @@ class MusicAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 1,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(15),
-          bottomRight: Radius.circular(15),
+          bottomLeft: Radius.circular(16),
+          bottomRight: Radius.circular(16),
         ),
       ),
       title: const Text("Magical music"),
