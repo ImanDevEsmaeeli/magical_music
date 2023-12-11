@@ -1,9 +1,11 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' as io;
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/tools/enums/bottomNavigationMode.dart';
+import 'package:open_filex/open_filex.dart';
 
 class MusicBottomNavigation extends StatelessWidget {
   const MusicBottomNavigation({super.key});
@@ -16,8 +18,8 @@ class MusicBottomNavigation extends StatelessWidget {
           icons: const [
             Icons.home_rounded,
             Icons.favorite_rounded,
-            Icons.edit_rounded,
-            Icons.delete_rounded,
+            Icons.play_circle_outline_rounded,
+            Icons.text_snippet_rounded,
           ],
           activeIndex: toolCtrl.navigationMode.index,
           gapLocation: GapLocation.center,
@@ -27,26 +29,30 @@ class MusicBottomNavigation extends StatelessWidget {
           leftCornerRadius: 25,
           rightCornerRadius: 25,
           notchSmoothness: NotchSmoothness.smoothEdge,
-          onTap: (idx) {
+          onTap: (idx) async {
             toolCtrl.setnavigationMode(BottomNavigationMode.values[idx]);
-
+            MusicControllers music = Get.find<MusicControllers>();
+            ToolController tool = Get.find<ToolController>();
             switch (toolCtrl.navigationMode) {
               case BottomNavigationMode.home:
-                Get.find<ToolController>().checkBoxVisible(false);
-                Get.find<MusicControllers>().refreshItems();
+                tool.checkBoxVisible(false);
+                music.refreshItems();
                 break;
               case BottomNavigationMode.favorite:
-                Get.find<ToolController>().checkBoxVisible(false);
-                Get.find<MusicControllers>().showFavorite();
+                tool.checkBoxVisible(false);
+                music.showFavorite();
                 break;
-              case BottomNavigationMode.edit:
-                Get.find<ToolController>().checkBoxVisible(false);
-                Get.find<MusicControllers>().refreshItems();
-
+              case BottomNavigationMode.musicPlay:
+                if (music.selectedMusic.musicAddress.isNotEmpty &&
+                    io.File(music.selectedMusic.musicAddress).existsSync()) {
+                  await OpenFilex.open(music.selectedMusic.musicAddress);
+                }
                 break;
-              case BottomNavigationMode.delete:
-                Get.find<MusicControllers>().refreshItems();
-                Get.find<ToolController>().checkBoxVisible(true);
+              case BottomNavigationMode.text:
+                if (music.selectedMusic.textAddress.isNotEmpty &&
+                    io.File(music.selectedMusic.textAddress).existsSync()) {
+                  await OpenFilex.open(music.selectedMusic.textAddress);
+                }
                 break;
               default:
             }
