@@ -1,4 +1,3 @@
-import 'package:animated_react_button/animated_react_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
@@ -60,9 +59,9 @@ class ListItem extends StatelessWidget {
                         musicController.favorite(music);
                       },
                       icon: music.isFavorite
-                          ? const Icon(
+                          ? Icon(
                               Icons.favorite,
-                              color: Colors.red,
+                              color: Colors.red.shade400,
                             )
                           : const Icon(
                               Icons.favorite_border_outlined,
