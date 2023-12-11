@@ -1,0 +1,4 @@
+enum CrudMode {
+  add,
+  edit,
+}
