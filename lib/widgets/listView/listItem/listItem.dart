@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
-import 'package:magical_music/widgets/listGridView/listItem/onLongPressView.dart';
+import 'package:magical_music/widgets/listView/listItem/onLongPressView.dart';
 
 class ListItem extends StatelessWidget {
   const ListItem({super.key, required this.music});

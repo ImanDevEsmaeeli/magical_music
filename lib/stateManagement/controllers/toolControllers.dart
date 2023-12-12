@@ -80,6 +80,7 @@ class ToolController extends GetxController {
 
   void setcrudeMode(CrudMode mode) {
     _crudMode = mode;
+    update();
   }
 
   bool _playerVisibility = false;

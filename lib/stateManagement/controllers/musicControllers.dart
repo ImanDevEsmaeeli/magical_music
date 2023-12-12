@@ -49,6 +49,7 @@ class MusicControllers extends GetxController {
 
   final RxList<Music> _items = RxList();
   List<Music> get items {
+    refreshItems();
     return [..._items];
   }
 

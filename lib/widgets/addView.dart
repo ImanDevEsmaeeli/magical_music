@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
@@ -28,7 +29,12 @@ class AddView extends StatelessWidget {
       );
     } else if (mode == CrudMode.edit) {
       musicItem = Get.find<MusicControllers>().selectedMusic;
-      if (musicItem.musicAddress.isNotEmpty) {}
+      if (musicItem.musicAddress.isNotEmpty) {
+        _isMusicfileSelected = true;
+      }
+      if (musicItem.textAddress.isNotEmpty) {
+        _isPdffileSelected = true;
+      }
     }
   }
 
@@ -48,8 +54,8 @@ class AddView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _tools = Get.find<ToolController>();
-    final _music = Get.find<MusicControllers>();
-    final _musics = _music.items;
+    //final _music = Get.find<MusicControllers>();
+    // final _musics = _music.items;
 
     return AlertDialog(
       contentPadding: EdgeInsets.all(1),
@@ -84,6 +90,8 @@ class AddView extends StatelessWidget {
             ),
           ),
           child: GetBuilder<MusicControllers>(
+            id: MusicIds.addView,
+            init: MusicControllers(),
             builder: (musicController) => Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -123,6 +131,7 @@ class AddView extends StatelessWidget {
                           _isMusicfileSelected = true;
                           // });
                           nametxt.text = musicResult!.names[0].toString();
+                          musicController.update([MusicIds.addView]);
                         }
                       }
                     },
@@ -159,6 +168,7 @@ class AddView extends StatelessWidget {
                               pdfResult!.paths[0].toString();
                           // setState(() {
                           _isPdffileSelected = true;
+                          musicController.update([MusicIds.addView]);
                           // });
                         }
                       }
@@ -232,10 +242,10 @@ class AddView extends StatelessWidget {
                                 case CrudMode.add:
                                   musicItem.musicCategory = _tools.category;
                                   musicItem.id = Uuid().v1();
-                                  _music.add(musicItem);
+                                  musicController.add(musicItem);
                                   break;
                                 case CrudMode.edit:
-                                  _music.edit(musicItem);
+                                  musicController.edit(musicItem);
                                   break;
                                 default:
                               }

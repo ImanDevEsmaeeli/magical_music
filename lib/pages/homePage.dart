@@ -10,7 +10,7 @@ import '../tools/enums/crudMode.dart';
 import '../widgets/addView.dart';
 import '../widgets/musicAppBar.dart';
 import '../widgets/musicDrawer.dart';
-import '../widgets/listGridView/musicView.dart';
+import '../widgets/listView/musicView.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

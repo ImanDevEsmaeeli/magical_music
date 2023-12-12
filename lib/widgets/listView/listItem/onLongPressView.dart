@@ -38,6 +38,7 @@ class OnLongPressView extends StatelessWidget {
                         return AddView(mode: CrudMode.edit);
                       },
                     );
+                    Get.close(1);
                   },
                   child: const Text("edit")),
               OutlinedButton(
@@ -53,6 +54,7 @@ class OnLongPressView extends StatelessWidget {
                 ),
                 onPressed: () {
                   Get.find<ToolController>().checkBoxVisible(true);
+                  Get.find<ToolController>().setcrudeMode(CrudMode.delete);
                   Get.close(1);
                 },
                 child: const Text("multi delete"),

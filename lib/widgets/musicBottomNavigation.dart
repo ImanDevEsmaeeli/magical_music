@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/tools/enums/bottomNavigationMode.dart';
+import 'package:magical_music/tools/enums/crudMode.dart';
 import 'package:open_filex/open_filex.dart';
 
 class MusicBottomNavigation extends StatelessWidget {
@@ -35,10 +36,12 @@ class MusicBottomNavigation extends StatelessWidget {
             ToolController tool = Get.find<ToolController>();
             switch (toolCtrl.navigationMode) {
               case BottomNavigationMode.home:
+                tool.setcrudeMode(CrudMode.add);
                 tool.checkBoxVisible(false);
                 music.refreshItems();
                 break;
               case BottomNavigationMode.favorite:
+                tool.setcrudeMode(CrudMode.add);
                 tool.checkBoxVisible(false);
                 music.showFavorite();
                 break;

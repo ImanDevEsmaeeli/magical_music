@@ -13,37 +13,39 @@ class MusicFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ToolController>(builder: (controller) {
-      // if (true) {
-      //   return FloatingActionButton(
-      //     onPressed: () {
-      //       var musics = Get.find<MusicControllers>();
-      //       if (musics.selectedMusics.isNotEmpty) {
-      //         for (Music music in musics.selectedMusics) {
-      //           musics.delete(music);
-      //         }
-      //       }
-      //     },
-      //     backgroundColor: Colors.yellow,
-      //     child: const Icon(
-      //       Icons.delete,
-      //       color: Colors.red,
-      //     ),
-      //   );
-      // } else {
-      return FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) {
-              return AddView(mode: CrudMode.add);
-            },
-          );
-        },
-        child: const Icon(
-          Icons.add,
-        ),
-      );
-      // }
+      if (controller.crudMode == CrudMode.delete) {
+        return FloatingActionButton(
+          onPressed: () {
+            var musics = Get.find<MusicControllers>();
+            if (musics.selectedMusics.isNotEmpty) {
+              for (Music music in musics.selectedMusics) {
+                musics.delete(music);
+              }
+            }
+            controller.checkBoxVisible(false);
+            controller.setcrudeMode(CrudMode.add);
+          },
+          backgroundColor: Colors.yellow,
+          child: const Icon(
+            Icons.delete,
+            color: Colors.red,
+          ),
+        );
+      } else {
+        return FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) {
+                return AddView(mode: CrudMode.add);
+              },
+            );
+          },
+          child: const Icon(
+            Icons.add,
+          ),
+        );
+      }
     });
   }
 }
