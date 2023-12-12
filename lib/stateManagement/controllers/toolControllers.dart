@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:magical_music/database/services/toolDB.dart';
 import 'package:magical_music/tools/enums/bottomNavigationMode.dart';
+import 'package:magical_music/tools/enums/crudMode.dart';
 import 'package:uuid/uuid.dart';
 
 class ToolController extends GetxController {
@@ -70,6 +71,15 @@ class ToolController extends GetxController {
   void setnavigationMode(BottomNavigationMode mode) {
     _navigationMode = mode;
     update();
+  }
+
+  CrudMode _crudMode = CrudMode.add;
+  CrudMode get crudMode {
+    return _crudMode;
+  }
+
+  void setcrudeMode(CrudMode mode) {
+    _crudMode = mode;
   }
 
   bool _playerVisibility = false;

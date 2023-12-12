@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
-import 'package:magical_music/widgets/listGridView/listItem.dart';
+import 'package:magical_music/widgets/listGridView/listItem/listItem.dart';
 
 class MusicList extends GetView<MusicControllers> {
   final List<Music> _items = Get.find<MusicControllers>().items;
