@@ -38,7 +38,6 @@ class OnLongPressView extends StatelessWidget {
                         return AddView(mode: CrudMode.edit);
                       },
                     );
-                    Get.close(1);
                   },
                   child: const Text("edit")),
               OutlinedButton(

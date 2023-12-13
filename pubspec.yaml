@@ -48,6 +48,7 @@ dependencies:
   animated_list_plus: ^0.5.2
   animated_react_button: ^0.0.4
   open_filex: ^4.3.4
+  animation_search_bar: ^0.0.10
 
 dev_dependencies:
   flutter_test:

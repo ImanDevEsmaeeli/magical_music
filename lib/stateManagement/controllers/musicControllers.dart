@@ -5,6 +5,7 @@ import '../models/music.dart';
 
 class MusicControllers extends GetxController {
   MusicDB _db = MusicDB();
+  String category = "";
 
   MusicControllers() {
     _items.addAll(get());
@@ -12,7 +13,15 @@ class MusicControllers extends GetxController {
 
   String _searchTxt = "";
   String get searchTxt => _searchTxt;
-  set searchTxt(String txt) {}
+  set searchTxt(String txt) {
+    _searchTxt = txt;
+    items = get(
+      (m) =>
+          (m.musicCategory == category) &&
+          (m.name.toLowerCase().contains(txt.toLowerCase())),
+    );
+    update();
+  }
 
   Music? _selectedMusic;
   Music get selectedMusic {
@@ -49,7 +58,7 @@ class MusicControllers extends GetxController {
 
   final RxList<Music> _items = RxList();
   List<Music> get items {
-    refreshItems();
+    //refreshItems();
     return [..._items];
   }
 
@@ -60,7 +69,7 @@ class MusicControllers extends GetxController {
   }
 
   void refreshItems() {
-    var category = Get.find<ToolController>().category;
+    category = Get.find<ToolController>().category;
     items = get((m) => m.musicCategory == category);
   }
 

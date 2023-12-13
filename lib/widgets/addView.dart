@@ -35,6 +35,8 @@ class AddView extends StatelessWidget {
       if (musicItem.textAddress.isNotEmpty) {
         _isPdffileSelected = true;
       }
+      nametxt.text = musicItem.name;
+      descriptiontxt.text = musicItem.description;
     }
   }
 

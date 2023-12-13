@@ -28,7 +28,6 @@ class MusicView extends StatelessWidget {
               initState: (state) {
                 var tool = Get.find<ToolController>();
                 selectedIndex = tool.categories.indexOf(tool.category);
-                int p = 0;
               },
               builder: (controller) {
                 return SingleChildScrollView(

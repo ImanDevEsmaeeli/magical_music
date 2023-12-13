@@ -15,6 +15,7 @@ class ToolController extends GetxController {
 
   void setCategory(int category) {
     _db.setCategory(category);
+
     update();
   }
 
