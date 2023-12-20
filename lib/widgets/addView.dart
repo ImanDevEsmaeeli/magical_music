@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/bindings/musicIds.dart';
-import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
+import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 import 'package:magical_music/tools/enums/crudMode.dart';

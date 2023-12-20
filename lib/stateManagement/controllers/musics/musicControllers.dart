@@ -1,59 +1,16 @@
 import 'package:get/get.dart';
 import 'package:magical_music/database/services/musicDB.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
-import '../models/music.dart';
+import '../../models/music.dart';
+import 'favoriteMusicController.dart';
+import 'selectionMusicControllers.dart';
 
-class MusicControllers extends GetxController {
+class MusicControllers extends SelectionMusicControllers {
   MusicDB _db = MusicDB();
   String category = "";
 
   MusicControllers() {
     _items.addAll(get());
-  }
-
-  String _searchTxt = "";
-  String get searchTxt => _searchTxt;
-  set searchTxt(String txt) {
-    _searchTxt = txt;
-    items = get(
-      (m) =>
-          (m.musicCategory == category) &&
-          (m.name.toLowerCase().contains(txt.toLowerCase())),
-    );
-    update();
-  }
-
-  Music? _selectedMusic;
-  Music get selectedMusic {
-    if (_selectedMusic != null) {
-      return _selectedMusic as Music;
-    }
-    return Music(
-      id: "id",
-      name: "name",
-      musicAddress: "musicAddress",
-      musicCategory: "musicCategory",
-    );
-  }
-
-  void selectMusic(Music music) {
-    _selectedMusic = music;
-    update();
-  }
-
-  List<Music> _selectedMusics = [];
-  List<Music> get selectedMusics {
-    return _selectedMusics;
-  }
-
-  void addSelectedMusics(Music music) {
-    _selectedMusics.add(music);
-    update();
-  }
-
-  void removeSelectedMusics(Music music) {
-    _selectedMusics.remove(music);
-    update();
   }
 
   final RxList<Music> _items = RxList();
@@ -101,6 +58,8 @@ class MusicControllers extends GetxController {
     update();
   }
 
+  ///must to be exit this class
+  ///based on SOLID
   void favorite(Music music) {
     music.isFavorite = (!music.isFavorite);
     edit(music);
@@ -108,6 +67,18 @@ class MusicControllers extends GetxController {
 
   void showFavorite() {
     items = get((m) => m.isFavorite == true);
+    update();
+  }
+
+  String _searchTxt = "";
+  String get searchTxt => _searchTxt;
+  set searchTxt(String txt) {
+    _searchTxt = txt;
+    items = get(
+      (m) =>
+          (m.musicCategory == category) &&
+          (m.name.toLowerCase().contains(txt.toLowerCase())),
+    );
     update();
   }
 }

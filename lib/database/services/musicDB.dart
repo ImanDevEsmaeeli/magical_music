@@ -36,7 +36,6 @@ class MusicDB {
 
   void delete(Music music) async {
     int index = _box!.values.toList().indexWhere((m) => m.id == music.id);
-
     await _box!.deleteAt(index);
   }
 
@@ -51,7 +50,7 @@ class MusicDB {
     newMusic.textAddress = music.textAddress;
     newMusic.isFavorite = music.isFavorite;
     newMusic.musicCategory = music.musicCategory;
-    // newMusic.musicCategory = music.musicCategory;
+
     _box?.putAt(indx, newMusic);
   }
 

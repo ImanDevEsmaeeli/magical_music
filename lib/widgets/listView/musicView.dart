@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
+import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import '../listView/musicList.dart';
 

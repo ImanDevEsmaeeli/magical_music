@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
+import 'dart:io' as io;
+import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 import 'package:magical_music/widgets/listView/listItem/onLongPressView.dart';
+import 'package:open_filex/open_filex.dart';
 
 class ListItem extends StatelessWidget {
   const ListItem({super.key, required this.music});
@@ -70,8 +72,14 @@ class ListItem extends StatelessWidget {
                             color: Colors.red,
                           ),
                   ),
-                  onTap: () {
-                    Get.find<MusicControllers>().selectMusic(music);
+                  onTap: () async {
+                    musicController.selectMusic(music);
+                    if (musicController.selectedMusic.musicAddress.isNotEmpty &&
+                        io.File(musicController.selectedMusic.musicAddress)
+                            .existsSync()) {
+                      await OpenFilex.open(
+                          musicController.selectedMusic.musicAddress);
+                    }
                   },
                   onLongPress: () {
                     Get.find<MusicControllers>().selectMusic(music);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animation_search_bar/animation_search_bar.dart';
 import 'package:get/get.dart';
-import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
+import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 
 class MusicAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MusicAppBar({super.key});
@@ -22,12 +22,13 @@ class MusicAppBar extends StatelessWidget implements PreferredSizeWidget {
           searchIconColor: Colors.white,
           closeIconColor: Colors.white,
           cursorColor: Colors.black54,
-          searchFieldDecoration: const ShapeDecoration(
+          searchFieldDecoration: ShapeDecoration(
             shape: StadiumBorder(),
-            color: Colors.white,
+            color: Colors.white.withOpacity(0.9),
           ),
           centerTitle: " ",
-          searchBarWidth: Get.width / 2.2,
+          textStyle: TextStyle(decoration: TextDecoration.none),
+          searchBarWidth: (Get.width) * 2 / 3,
           isBackButtonVisible: false,
           onChanged: (onChanged) {
             Get.find<MusicControllers>().searchTxt = onChanged;
