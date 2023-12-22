@@ -16,7 +16,7 @@ class MusicAppBar extends StatelessWidget implements PreferredSizeWidget {
           bottomRight: Radius.circular(16),
         ),
       ),
-      title: const Text("Magical music"),
+      //title: const Text("Magical music"),
       actions: [
         AnimationSearchBar(
           searchIconColor: Colors.white,
@@ -26,9 +26,14 @@ class MusicAppBar extends StatelessWidget implements PreferredSizeWidget {
             shape: StadiumBorder(),
             color: Colors.white.withOpacity(0.9),
           ),
-          centerTitle: " ",
+          centerTitle: "Magical music",
+          centerTitleStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
           textStyle: TextStyle(decoration: TextDecoration.none),
-          searchBarWidth: (Get.width) * 2 / 3,
+          searchBarWidth: (Get.width),
           isBackButtonVisible: false,
           onChanged: (onChanged) {
             Get.find<MusicControllers>().searchTxt = onChanged;

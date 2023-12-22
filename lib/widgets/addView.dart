@@ -207,10 +207,10 @@ class AddView extends StatelessWidget {
                   padding: const EdgeInsets.all(7.0),
                   child: TextField(
                     controller: descriptiontxt,
-                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       labelText: 'Description',
                       icon: SvgPicture.asset(
                         "assets/icons/musicDescription.svg",

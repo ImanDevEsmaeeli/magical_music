@@ -33,9 +33,7 @@ class MusicDrawer extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
         selectedItemDecoration: BoxDecoration(
-          color: Colors.blue,
-          gradient: LinearGradient(
-              colors: [Colors.green.shade200, Colors.teal.shade200]),
+          color: Colors.blue.shade100,
           borderRadius: BorderRadius.circular(7),
           border: Border.all(
             color: Colors.blue,
@@ -56,10 +54,10 @@ class MusicDrawer extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.blue,
+              Colors.blue.shade300,
               Colors.lightBlue,
+              Colors.blue.shade100,
               Colors.green,
-              Colors.green.shade800,
             ],
           ),
         ),

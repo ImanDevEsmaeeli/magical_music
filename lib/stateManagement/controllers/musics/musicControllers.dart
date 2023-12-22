@@ -10,7 +10,7 @@ class MusicControllers extends SelectionMusicControllers {
   String category = "";
 
   MusicControllers() {
-    _items.addAll(get());
+    refreshItems();
   }
 
   final RxList<Music> _items = RxList();
@@ -34,7 +34,7 @@ class MusicControllers extends SelectionMusicControllers {
     if (func == null) {
       return _db.get();
     } else {
-      return _db.get().where(func as bool Function(Music)).toList();
+      return _db.get().where(func).toList();
     }
   }
 
@@ -58,8 +58,6 @@ class MusicControllers extends SelectionMusicControllers {
     update();
   }
 
-  ///must to be exit this class
-  ///based on SOLID
   void favorite(Music music) {
     music.isFavorite = (!music.isFavorite);
     edit(music);

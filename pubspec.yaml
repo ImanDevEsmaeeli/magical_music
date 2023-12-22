@@ -49,6 +49,7 @@ dependencies:
   animated_react_button: ^0.0.4
   open_filex: ^4.3.4
   animation_search_bar: ^0.0.10
+  google_fonts: ^6.1.0 
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,12 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   build_runner: ^2.4.7
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/iconizer-Treble Clef.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
