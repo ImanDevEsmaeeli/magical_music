@@ -1,6 +1,7 @@
 # magical_music
 
-A new Flutter project.
+A new Flutter project to manage music file and their text.
+It is useful for musicians and people who work in the field of music.
 
 ## Getting Started
 
