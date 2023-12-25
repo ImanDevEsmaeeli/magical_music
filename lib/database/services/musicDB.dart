@@ -11,6 +11,10 @@ class MusicDB {
     _box = Hive.box<MusicDbModel>(boxname);
   }
 
+  String? getPathDirectory() {
+    return _box!.path;
+  }
+
   Music _convertToMusic(MusicDbModel musicDbModel) {
     return Music(
       id: musicDbModel.id,

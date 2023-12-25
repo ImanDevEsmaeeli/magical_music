@@ -15,6 +15,9 @@ class ToolsDB {
       _box?.add(_db);
     }
   }
+  String? getPathDirectory() {
+    return _box?.path;
+  }
 
   void add(String category, String id) {
     _db.musicCategory = category;

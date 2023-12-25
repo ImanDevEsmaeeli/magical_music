@@ -50,6 +50,7 @@ dependencies:
   open_filex: ^4.3.4
   animation_search_bar: ^0.0.10
   google_fonts: ^6.1.0 
+  like_button: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -100,6 +101,10 @@ flutter:
     - assets/icons/SettingFill.svg
     - assets/icons/SettingOutline.svg
     - assets/icons/sheet_music.svg
+    - assets/icons/database.svg
+    - assets/icons/database_export.svg
+    - assets/icons/database_import.svg
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

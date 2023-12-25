@@ -93,4 +93,8 @@ class ToolController extends GetxController {
     _playerVisibility = visible;
     update();
   }
+
+  String getPath() {
+    return _db.getPathDirectory().toString();
+  }
 }

@@ -54,6 +54,9 @@ class MusicView extends StatelessWidget {
                           selectedIndex = value ? index : selectedIndex;
                           controller.setCategory(selectedIndex);
                           Get.find<MusicControllers>().refreshItems();
+
+                          var items = Get.find<MusicControllers>().get();
+                          var o = 0;
                         },
                       ),
                     ),

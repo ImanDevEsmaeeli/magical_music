@@ -93,6 +93,17 @@ class MusicDrawer extends StatelessWidget {
             Get.toNamed(Routes.setting);
           },
         ),
+        SidebarXItem(
+          label: "Back up",
+          iconWidget: SvgPicture.asset(
+            "assets/icons/database.svg",
+            height: 30,
+            colorFilter: const ColorFilter.srgbToLinearGamma(),
+          ),
+          onTap: () {
+            Get.toNamed(Routes.bachup);
+          },
+        )
       ],
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
+import 'package:magical_music/stateManagement/models/music.dart';
 
 class SettingPage extends StatefulWidget {
   List<String> labels = [];
@@ -56,6 +58,7 @@ class _SettingPageState extends State<SettingPage> {
                           selectedIndex = value ? index : selectedIndex;
                         });
                         _txt = ctrl.categories[selectedIndex];
+                        ctrl.setCategory(selectedIndex);
                       },
                     ),
                   ),
@@ -91,7 +94,12 @@ class _SettingPageState extends State<SettingPage> {
                     label: "add",
                     func: (() {
                       if (_txt.length != 0) {
-                        widget.tools.add(_txt);
+                        String? isContain = Get.find<ToolController>()
+                            .categories
+                            .firstWhereOrNull((m) => m == _txt);
+                        if (isContain == null) {
+                          widget.tools.add(_txt);
+                        }
                       }
                     }),
                   ),
@@ -101,9 +109,20 @@ class _SettingPageState extends State<SettingPage> {
                     icon: Icons.edit,
                     label: "edit",
                     func: (() {
+                      String oldName = widget.tools.category;
+                      var music = Get.find<MusicControllers>();
+
                       if (_txt.length != 0) {
                         widget.tools.edit(selectedIndex, _txt);
+                        List<Music> musics =
+                            music.get((m) => m.musicCategory == oldName);
+                        for (var item in musics) {
+                          item.musicCategory = _txt;
+                          music.edit(item);
+                        }
                       }
+
+                      _txt = "";
                     }),
                   ),
                   //
@@ -112,8 +131,15 @@ class _SettingPageState extends State<SettingPage> {
                     icon: Icons.delete,
                     label: "delete",
                     func: (() {
+                      var music = Get.find<MusicControllers>();
                       if (_txt.length != 0) {
                         widget.tools.delete(selectedIndex);
+                        List<Music> musics =
+                            music.get((m) => m.musicCategory == _txt);
+                        for (var item in musics) {
+                          music.delete(item);
+                        }
+
                         _txt = "";
                       }
                     }),

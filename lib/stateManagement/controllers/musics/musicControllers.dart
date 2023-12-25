@@ -38,6 +38,10 @@ class MusicControllers extends SelectionMusicControllers {
     }
   }
 
+  Music getById(String id) {
+    return get((m) => m.id == id)[0];
+  }
+
   void add(Music music) {
     MusicDB addDB = MusicDB();
     addDB.add(music);
@@ -78,5 +82,9 @@ class MusicControllers extends SelectionMusicControllers {
           (m.name.toLowerCase().contains(txt.toLowerCase())),
     );
     update();
+  }
+
+  String getPath() {
+    return _db.getPathDirectory().toString();
   }
 }
