@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:magical_music/pages/backUpPage.dart';
-import 'package:magical_music/pages/homePage.dart';
-import 'package:magical_music/pages/settingPage.dart';
+import 'package:magical_music/design/pages/backUpPage.dart';
+import 'package:magical_music/design/pages/homePage.dart';
+import 'package:magical_music/design/pages/settingPage.dart';
 
 class Routes {
   static String home = "/Home";

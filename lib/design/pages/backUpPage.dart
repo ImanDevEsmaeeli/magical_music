@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +8,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
+import 'package:path_provider/path_provider.dart';
 
 class BackUpPage extends StatelessWidget {
   BackUpPage({super.key});
 
   String? folderPath;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +39,16 @@ class BackUpPage extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                folderPath = await FilePicker.platform.getDirectoryPath();
-                List<String> dataBasePath = [];
-                dataBasePath.add(Get.find<MusicControllers>().getPath());
-                dataBasePath.add(Get.find<ToolController>().getPath());
+                Get.find<MusicControllers>().createBackup();
 
-                for (var element in dataBasePath) {
-                  await io.File(element).copy(folderPath.toString());
-                }
+                // folderPath = await FilePicker.platform.getDirectoryPath();
+                // List<String> dataBasePath = [];
+                // dataBasePath.add(Get.find<MusicControllers>().getPath());
+                // dataBasePath.add(Get.find<ToolController>().getPath());
+
+                // for (var element in dataBasePath) {
+                //   await io.File(element).copy(folderPath.toString());
+                // }
 
                 // await File(Get.find<MusicControllers>().items[0].musicAddress)
                 //     .copy(folderPath.toString());

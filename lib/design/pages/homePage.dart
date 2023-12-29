@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magical_music/widgets/musicBottomNavigation.dart';
-import 'package:magical_music/widgets/musicFloatingButton.dart';
+import 'package:magical_music/design/widgets/musicBottomNavigation.dart';
+import 'package:magical_music/design/widgets/musicFloatingButton.dart';
 import '../widgets/musicAppBar.dart';
 import '../widgets/musicDrawer.dart';
 import '../widgets/listView/musicView.dart';

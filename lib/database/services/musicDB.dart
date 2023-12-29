@@ -15,6 +15,10 @@ class MusicDB {
     return _box!.path;
   }
 
+  Box<MusicDbModel>? getDatabaseBox() {
+    return _box;
+  }
+
   Music _convertToMusic(MusicDbModel musicDbModel) {
     return Music(
       id: musicDbModel.id,

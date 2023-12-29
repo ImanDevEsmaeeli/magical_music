@@ -5,8 +5,8 @@ import 'dart:io' as io;
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
-import 'package:magical_music/widgets/listView/listItem/animatedFavoriteIcon.dart';
-import 'package:magical_music/widgets/listView/listItem/onLongPressView.dart';
+import 'package:magical_music/design/widgets/listView/listItem/animatedFavoriteIcon.dart';
+import 'package:magical_music/design/widgets/listView/listItem/onLongPressView.dart';
 import 'package:open_filex/open_filex.dart';
 
 class ListItem extends StatelessWidget {

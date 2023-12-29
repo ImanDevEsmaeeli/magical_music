@@ -5,7 +5,7 @@ import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 import 'package:magical_music/tools/enums/bottomNavigationMode.dart';
 import 'package:magical_music/tools/enums/crudMode.dart';
-import 'package:magical_music/widgets/addView.dart';
+import 'package:magical_music/design/widgets/addView.dart';
 
 class MusicFloatingActionButton extends StatelessWidget {
   const MusicFloatingActionButton({super.key});
