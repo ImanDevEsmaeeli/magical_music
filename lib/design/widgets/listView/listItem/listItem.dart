@@ -49,6 +49,7 @@ class ListItem extends StatelessWidget {
             initState: (_) {},
             builder: (musicController) {
               return Card(
+                shape: StadiumBorder(),
                 color: (musicController.selectedMusic.id == music.id)
                     ? Colors.blue.shade300
                     : Colors.blue.shade100,
@@ -60,33 +61,7 @@ class ListItem extends StatelessWidget {
                       "assets/images/violinGridTile.jpg",
                     ),
                   ),
-                  trailing:
-                      //  SizedBox(
-                      //   height: 33,
-                      //   width: 33,
-                      //   child: Stack(
-                      //     children: [
-                      //       LikeButton(
-                      //         isLiked: music.isFavorite,
-                      //         likeBuilder: (isLiked) {
-                      //           return Icon(
-                      //             Icons.favorite_rounded,
-                      //             color:
-                      //                 music.isFavorite ? Colors.red : Colors.grey,
-                      //           );
-                      //         },
-                      //         onTap: null,
-                      //       ),
-                      //       InkWell(
-                      //         onTap: () {
-                      //           //musicController.favorite(music);
-                      //         },
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
-
-                      IconButton(
+                  trailing: IconButton(
                     onPressed: () {
                       musicController.favorite(music);
                     },
@@ -122,26 +97,37 @@ class ListItem extends StatelessWidget {
           init: ToolController(),
           initState: (_) {},
           builder: (toolController) {
-            return Visibility(
-              visible: toolController.checkBoxVisiblity,
-              child: GetBuilder<MusicControllers>(
-                builder: (musicController) {
-                  return Checkbox(
-                    value: musicController.selectedMusics.contains(music),
-                    onChanged: (val) {
-                      if (val == true) {
-                        musicController.addSelectedMusics(music);
-                      } else {
-                        if (musicController.selectedMusics.contains(music)) {
-                          musicController.removeSelectedMusics(music);
-                        }
-                      }
-                    },
-                    shape: CircleBorder(),
-                    checkColor: Colors.green,
-                    activeColor: Colors.lightGreen.shade300,
-                  );
-                },
+            return AnimatedSize(
+              duration: Duration(milliseconds: 300),
+              reverseDuration: Duration(milliseconds: 300),
+              child: Visibility(
+                maintainAnimation: true,
+                maintainState: true,
+                visible: toolController.checkBoxVisiblity,
+                child: GetBuilder<MusicControllers>(
+                  builder: (musicController) {
+                    return SizedBox(
+                      width:
+                          toolController.checkBoxVisiblity ? Get.width / 9 : 0,
+                      child: Checkbox(
+                        value: musicController.selectedMusics.contains(music),
+                        onChanged: (val) {
+                          if (val == true) {
+                            musicController.addSelectedMusics(music);
+                          } else {
+                            if (musicController.selectedMusics
+                                .contains(music)) {
+                              musicController.removeSelectedMusics(music);
+                            }
+                          }
+                        },
+                        shape: CircleBorder(),
+                        checkColor: Colors.green,
+                        activeColor: Colors.lightGreen.shade300,
+                      ),
+                    );
+                  },
+                ),
               ),
             );
           },

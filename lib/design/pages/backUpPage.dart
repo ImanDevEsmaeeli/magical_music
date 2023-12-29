@@ -12,9 +12,7 @@ import 'package:path_provider/path_provider.dart';
 
 class BackUpPage extends StatelessWidget {
   BackUpPage({super.key});
-
   String? folderPath;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +37,7 @@ class BackUpPage extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                Get.find<MusicControllers>().createBackup();
+                // Get.find<MusicControllers>().createBackup();
 
                 // folderPath = await FilePicker.platform.getDirectoryPath();
                 // List<String> dataBasePath = [];

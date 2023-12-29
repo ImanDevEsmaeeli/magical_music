@@ -14,21 +14,38 @@ class MusicFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ToolController>(builder: (controller) {
       if (controller.crudMode == CrudMode.delete) {
-        return FloatingActionButton(
-          onPressed: () {
-            var musics = Get.find<MusicControllers>();
-            if (musics.selectedMusics.isNotEmpty) {
-              for (Music music in musics.selectedMusics) {
-                musics.delete(music);
+        return Badge(
+          offset: Offset(5, -5),
+          largeSize: 25,
+          label: SizedBox(
+            width: 17,
+            child: IconButton(
+              iconSize: 15,
+              padding: EdgeInsets.all(0),
+              color: Colors.white,
+              onPressed: () {
+                controller.checkBoxVisible(false);
+                controller.setcrudeMode(CrudMode.add);
+              },
+              icon: Icon(Icons.close),
+            ),
+          ),
+          child: FloatingActionButton(
+            onPressed: () {
+              var musics = Get.find<MusicControllers>();
+              if (musics.selectedMusics.isNotEmpty) {
+                for (Music music in musics.selectedMusics) {
+                  musics.delete(music);
+                }
               }
-            }
-            controller.checkBoxVisible(false);
-            controller.setcrudeMode(CrudMode.add);
-          },
-          backgroundColor: Colors.yellow,
-          child: const Icon(
-            Icons.delete,
-            color: Colors.red,
+              controller.checkBoxVisible(false);
+              controller.setcrudeMode(CrudMode.add);
+            },
+            backgroundColor: Colors.yellow,
+            child: Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
           ),
         );
       } else {
