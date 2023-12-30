@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:like_button/like_button.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 
@@ -159,30 +160,37 @@ import 'package:magical_music/stateManagement/models/music.dart';
 //   }
 // }
 
-class AnimatedFavoriteIcon extends StatelessWidget {
+class AnimatedFavoriteIcon extends StatefulWidget {
   AnimatedFavoriteIcon({super.key, required this.music});
   final Music music;
 
   @override
+  State<AnimatedFavoriteIcon> createState() => _AnimatedFavoriteIconState();
+}
+
+class _AnimatedFavoriteIconState extends State<AnimatedFavoriteIcon> {
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<MusicControllers>(
+      id: MusicIds.favorite,
       init: MusicControllers(),
       initState: (_) {},
       builder: (controller) {
         return IconButton(
           onPressed: () {
-            controller.favorite(music);
+            controller.favorite(widget.music);
           },
           icon: Stack(
             alignment: Alignment.center,
             children: [
               TweenAnimationBuilder(
-                curve: music.isFavorite ? Curves.elasticOut : Curves.linear,
-                tween: music.isFavorite
+                curve:
+                    widget.music.isFavorite ? Curves.elasticOut : Curves.linear,
+                tween: widget.music.isFavorite
                     ? Tween<double>(begin: 0, end: 25)
                     : Tween<double>(begin: 25, end: 0),
-                duration: music.isFavorite
-                    ? Duration(milliseconds: 1300)
+                duration: widget.music.isFavorite
+                    ? Duration(milliseconds: 1000)
                     : Duration(milliseconds: 300),
                 builder: (context, sizeValue, _) => Icon(
                   Icons.favorite,
@@ -194,14 +202,14 @@ class AnimatedFavoriteIcon extends StatelessWidget {
                 slidingBeginOffset: Offset(0, 0),
                 fadeIn: true,
                 slidingCurve: Curves.linear,
-                fadingDuration: Duration(milliseconds: 500),
-                delay: Duration(milliseconds: 1000),
+                //fadingDuration: Duration(milliseconds: 500),
+                delay: Duration(milliseconds: 500),
                 child: TweenAnimationBuilder(
                   curve: Curves.linear,
-                  tween: music.isFavorite
+                  tween: widget.music.isFavorite
                       ? Tween<double>(begin: 25, end: 0)
                       : Tween<double>(begin: 0, end: 25),
-                  duration: Duration(seconds: 1),
+                  duration: Duration(milliseconds: 300),
                   builder: (context, sizeValue, _) => Icon(
                     Icons.favorite,
                     size: sizeValue,

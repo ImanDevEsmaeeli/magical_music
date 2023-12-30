@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:magical_music/database/models/musicDbModel.dart';
 import 'package:magical_music/database/services/musicDB.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../models/music.dart';
@@ -69,7 +70,9 @@ class MusicControllers extends SelectionMusicControllers {
 
   void favorite(Music music) {
     music.isFavorite = (!music.isFavorite);
-    edit(music);
+    _db.update(music);
+    _items[_items.indexWhere((m) => m.id == music.id)] = music;
+    update([MusicIds.favorite]);
   }
 
   void showFavorite() {

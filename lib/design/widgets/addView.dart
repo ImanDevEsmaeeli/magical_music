@@ -245,9 +245,11 @@ class AddView extends StatelessWidget {
                                   musicItem.musicCategory = _tools.category;
                                   musicItem.id = Uuid().v1();
                                   musicController.add(musicItem);
+                                  Navigator.pop(context, true);
                                   break;
                                 case CrudMode.edit:
                                   musicController.edit(musicItem);
+                                  Navigator.pop(context, true);
                                   break;
                                 default:
                               }

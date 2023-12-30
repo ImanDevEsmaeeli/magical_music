@@ -23,7 +23,7 @@ class MusicDrawer extends StatelessWidget {
       },
       footerDivider: const Divider(),
       footerBuilder: (context, extended) {
-        return const Text("Magical Music v.1");
+        return const Text("Magical Music v.2");
       },
       extendedTheme: SidebarXTheme(
         textStyle: const TextStyle(color: Colors.black87),
@@ -42,7 +42,7 @@ class MusicDrawer extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.all(10),
-        width: MediaQuery.of(context).size.width * 0.3,
+        width: Get.width * 0.4,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(25),
