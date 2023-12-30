@@ -61,20 +61,24 @@ class ListItem extends StatelessWidget {
                       "assets/images/violinGridTile.jpg",
                     ),
                   ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      musicController.favorite(music);
-                    },
-                    icon: music.isFavorite
-                        ? Icon(
-                            Icons.favorite,
-                            color: Colors.red.shade400,
-                          )
-                        : const Icon(
-                            Icons.favorite_border_outlined,
-                            color: Colors.red,
-                          ),
+                  trailing: AnimatedFavoriteIcon(
+                    music: music,
                   ),
+
+                  //  IconButton(
+                  //   onPressed: () {
+                  //     musicController.favorite(music);
+                  //   },
+                  //   icon: music.isFavorite
+                  //       ? Icon(
+                  //           Icons.favorite,
+                  //           color: Colors.red.shade400,
+                  //         )
+                  //       : const Icon(
+                  //           Icons.favorite_border_outlined,
+                  //           color: Colors.red,
+                  //         ),
+                  // ),
                   onTap: () async {
                     musicController.selectMusic(music);
                     if (musicController.selectedMusic.musicAddress.isNotEmpty &&

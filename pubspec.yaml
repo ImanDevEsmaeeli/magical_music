@@ -51,6 +51,7 @@ dependencies:
   animation_search_bar: ^0.0.10
   google_fonts: ^6.1.0 
   like_button: ^2.0.5
+  delayed_display: ^2.0.0
 
 dev_dependencies:
   flutter_test:
