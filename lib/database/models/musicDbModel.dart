@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 part 'musicDbModel.g.dart';
 
@@ -17,4 +20,25 @@ class MusicDbModel extends HiveObject {
   late bool isFavorite;
   @HiveField(6)
   late String musicCategory;
+
+  MusicDbModel();
+
+  MusicDbModel.fromJson(Map<String, dynamic> objectjson)
+      : description = objectjson["description"],
+        id = objectjson["id"],
+        name = objectjson["name"],
+        musicAddress = objectjson["musicAddress"],
+        textAddress = objectjson["textAddress"],
+        isFavorite = objectjson["isFavorite"],
+        musicCategory = objectjson["musicCategory"];
+
+  Map<String, dynamic> toJson() => {
+        "description": description,
+        "id": id,
+        "name": name,
+        "musicAddress": musicAddress,
+        "textAddress": textAddress,
+        "isFavorite": isFavorite,
+        "musicCategory": musicCategory
+      };
 }

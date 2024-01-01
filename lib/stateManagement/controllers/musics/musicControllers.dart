@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/database/models/musicDbModel.dart';
 import 'package:magical_music/database/services/musicDB.dart';
 import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
+import 'package:magical_music/tools/music_converters.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../models/music.dart';
 import 'favoriteMusicController.dart';
 import 'selectionMusicControllers.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MusicControllers extends SelectionMusicControllers {
   MusicDB _db = MusicDB();
@@ -28,7 +31,7 @@ class MusicControllers extends SelectionMusicControllers {
   set items(List<Music> musics) {
     _items.clear();
     _items.addAll(musics);
-    update();
+    update([MusicIds.musicList]);
   }
 
   void refreshItems() {
@@ -113,15 +116,20 @@ class MusicControllers extends SelectionMusicControllers {
         .toMap()
         .map((key, value) => MapEntry(key.toString(), value));
     String json = jsonEncode(map);
+
     Directory dir = await _getDirectory();
-    String formattedDate = DateTime.now()
-        .toString()
-        .replaceAll('.', '-')
-        .replaceAll(' ', '-')
-        .replaceAll(':', '-');
-    String path = '${dir.path}$formattedDate.hivebackup';
-    File backupFile = File(path);
-    await backupFile.writeAsString(json);
+
+    if (await dir.exists()) {
+      // dir = Directory(dir.path + "/");
+      String formattedDate = DateTime.now()
+          .toString()
+          .replaceAll('.', '-')
+          .replaceAll(' ', '-')
+          .replaceAll(':', '-');
+      String path = '${dir.path}$formattedDate.hivebackup';
+      File backupFile = File(path);
+      await backupFile.writeAsString(json);
+    }
   }
 
   Future<Directory> _getDirectory() async {
@@ -133,4 +141,9 @@ class MusicControllers extends SelectionMusicControllers {
     }
     return newDirectory;
   }
+
+  // Future<Directory> _getDirectory() async {
+  //   String? folderPath = await FilePicker.platform.getDirectoryPath();
+  //   return Directory(folderPath.toString());
+  // }
 }

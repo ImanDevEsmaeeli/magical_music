@@ -1,6 +1,7 @@
 import 'package:animated_list_plus/animated_list_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 import 'package:magical_music/design/widgets/listView/listItem/listItem.dart';
@@ -15,6 +16,7 @@ class MusicList extends GetView<MusicControllers> {
         SizedBox(height: 10),
         Expanded(
           child: GetBuilder<MusicControllers>(
+            id: MusicIds.musicList,
             builder: (controller) {
               return ImplicitlyAnimatedList<Music>(
                 items: controller.items,

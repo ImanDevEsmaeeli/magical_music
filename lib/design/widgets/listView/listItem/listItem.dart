@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'dart:io' as io;
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
@@ -45,6 +46,7 @@ class ListItem extends StatelessWidget {
       child: Row(children: [
         Expanded(
           child: GetBuilder<MusicControllers>(
+            id: MusicIds.listItem,
             init: MusicControllers(),
             initState: (_) {},
             builder: (musicController) {

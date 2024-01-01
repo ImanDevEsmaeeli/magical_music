@@ -37,7 +37,7 @@ class BackUpPage extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                // Get.find<MusicControllers>().createBackup();
+                Get.find<MusicControllers>().createBackup();
 
                 // folderPath = await FilePicker.platform.getDirectoryPath();
                 // List<String> dataBasePath = [];
