@@ -2,7 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
+import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 import 'package:magical_music/tools/enums/crudMode.dart';
@@ -28,7 +29,14 @@ class AddView extends StatelessWidget {
       );
     } else if (mode == CrudMode.edit) {
       musicItem = Get.find<MusicControllers>().selectedMusic;
-      if (musicItem.musicAddress.isNotEmpty) {}
+      if (musicItem.musicAddress.isNotEmpty) {
+        _isMusicfileSelected = true;
+      }
+      if (musicItem.textAddress.isNotEmpty) {
+        _isPdffileSelected = true;
+      }
+      nametxt.text = musicItem.name;
+      descriptiontxt.text = musicItem.description;
     }
   }
 
@@ -48,8 +56,8 @@ class AddView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _tools = Get.find<ToolController>();
-    final _music = Get.find<MusicControllers>();
-    final _musics = _music.items;
+    //final _music = Get.find<MusicControllers>();
+    // final _musics = _music.items;
 
     return AlertDialog(
       contentPadding: EdgeInsets.all(1),
@@ -84,6 +92,8 @@ class AddView extends StatelessWidget {
             ),
           ),
           child: GetBuilder<MusicControllers>(
+            id: MusicIds.addView,
+            init: MusicControllers(),
             builder: (musicController) => Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -123,6 +133,7 @@ class AddView extends StatelessWidget {
                           _isMusicfileSelected = true;
                           // });
                           nametxt.text = musicResult!.names[0].toString();
+                          musicController.update([MusicIds.addView]);
                         }
                       }
                     },
@@ -159,6 +170,7 @@ class AddView extends StatelessWidget {
                               pdfResult!.paths[0].toString();
                           // setState(() {
                           _isPdffileSelected = true;
+                          musicController.update([MusicIds.addView]);
                           // });
                         }
                       }
@@ -195,10 +207,10 @@ class AddView extends StatelessWidget {
                   padding: const EdgeInsets.all(7.0),
                   child: TextField(
                     controller: descriptiontxt,
-                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       labelText: 'Description',
                       icon: SvgPicture.asset(
                         "assets/icons/musicDescription.svg",
@@ -232,10 +244,12 @@ class AddView extends StatelessWidget {
                                 case CrudMode.add:
                                   musicItem.musicCategory = _tools.category;
                                   musicItem.id = Uuid().v1();
-                                  _music.add(musicItem);
+                                  musicController.add(musicItem);
+                                  Navigator.pop(context, true);
                                   break;
                                 case CrudMode.edit:
-                                  _music.edit(musicItem);
+                                  musicController.edit(musicItem);
+                                  Navigator.pop(context, true);
                                   break;
                                 default:
                               }

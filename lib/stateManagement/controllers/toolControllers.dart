@@ -15,6 +15,7 @@ class ToolController extends GetxController {
 
   void setCategory(int category) {
     _db.setCategory(category);
+
     update();
   }
 
@@ -80,6 +81,7 @@ class ToolController extends GetxController {
 
   void setcrudeMode(CrudMode mode) {
     _crudMode = mode;
+    update();
   }
 
   bool _playerVisibility = false;
@@ -90,5 +92,9 @@ class ToolController extends GetxController {
   void playerVisible(bool visible) {
     _playerVisibility = visible;
     update();
+  }
+
+  String getPath() {
+    return _db.getPathDirectory().toString();
   }
 }

@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:magical_music/stateManagement/controllers/musicControllers.dart';
-import 'package:magical_music/widgets/musicBottomNavigation.dart';
-import 'package:magical_music/widgets/musicFloatingButton.dart';
-import '../stateManagement/controllers/toolControllers.dart';
-import '../tools/enums/bottomNavigationMode.dart';
-import '../tools/enums/crudMode.dart';
-import '../widgets/addView.dart';
+import 'package:magical_music/design/widgets/musicBottomNavigation.dart';
+import 'package:magical_music/design/widgets/musicFloatingButton.dart';
 import '../widgets/musicAppBar.dart';
 import '../widgets/musicDrawer.dart';
-import '../widgets/listGridView/musicView.dart';
+import '../widgets/listView/musicView.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

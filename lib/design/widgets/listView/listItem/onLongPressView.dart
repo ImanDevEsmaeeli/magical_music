@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/tools/enums/crudMode.dart';
-import 'package:magical_music/widgets/addView.dart';
+import 'package:magical_music/design/widgets/addView.dart';
 
 class OnLongPressView extends StatelessWidget {
   const OnLongPressView({super.key});
@@ -53,6 +53,7 @@ class OnLongPressView extends StatelessWidget {
                 ),
                 onPressed: () {
                   Get.find<ToolController>().checkBoxVisible(true);
+                  Get.find<ToolController>().setcrudeMode(CrudMode.delete);
                   Get.close(1);
                 },
                 child: const Text("multi delete"),

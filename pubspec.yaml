@@ -48,6 +48,11 @@ dependencies:
   animated_list_plus: ^0.5.2
   animated_react_button: ^0.0.4
   open_filex: ^4.3.4
+  animation_search_bar: ^0.0.10
+  google_fonts: ^6.1.0 
+  like_button: ^2.0.5
+  delayed_display: ^2.0.0
+  permission_handler: ^11.0.1
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +65,12 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   build_runner: ^2.4.7
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/iconizer-Treble Clef.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -92,6 +103,10 @@ flutter:
     - assets/icons/SettingFill.svg
     - assets/icons/SettingOutline.svg
     - assets/icons/sheet_music.svg
+    - assets/icons/database.svg
+    - assets/icons/database_export.svg
+    - assets/icons/database_import.svg
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

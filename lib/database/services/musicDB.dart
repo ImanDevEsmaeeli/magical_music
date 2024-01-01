@@ -11,6 +11,14 @@ class MusicDB {
     _box = Hive.box<MusicDbModel>(boxname);
   }
 
+  String? getPathDirectory() {
+    return _box!.path;
+  }
+
+  Box<MusicDbModel>? getDatabaseBox() {
+    return _box;
+  }
+
   Music _convertToMusic(MusicDbModel musicDbModel) {
     return Music(
       id: musicDbModel.id,
@@ -36,7 +44,6 @@ class MusicDB {
 
   void delete(Music music) async {
     int index = _box!.values.toList().indexWhere((m) => m.id == music.id);
-
     await _box!.deleteAt(index);
   }
 
@@ -51,7 +58,7 @@ class MusicDB {
     newMusic.textAddress = music.textAddress;
     newMusic.isFavorite = music.isFavorite;
     newMusic.musicCategory = music.musicCategory;
-    // newMusic.musicCategory = music.musicCategory;
+
     _box?.putAt(indx, newMusic);
   }
 

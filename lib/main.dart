@@ -8,6 +8,7 @@ import 'package:magical_music/database/services/musicDB.dart';
 import 'package:magical_music/database/services/toolDB.dart';
 import 'package:magical_music/stateManagement/bindings/bindings.dart';
 import 'package:magical_music/routes/routes.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: MusicBindings(),
       initialRoute: Routes.home,
+      theme: ThemeData(
+        textTheme: GoogleFonts.courgetteTextTheme(Theme.of(context).textTheme),
+      ),
     );
   }
 }
