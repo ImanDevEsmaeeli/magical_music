@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
-import 'package:magical_music/design/widgets/listView/listItem/listItem.dart';
+import 'package:magical_music/design/widgets/listView/listItem/list_item.dart';
 
 class MusicList extends GetView<MusicControllers> {
   //final List<Music> _items = Get.find<MusicControllers>().items;

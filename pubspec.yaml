@@ -50,9 +50,8 @@ dependencies:
   open_filex: ^4.3.4
   animation_search_bar: ^0.0.10
   google_fonts: ^6.1.0 
-  like_button: ^2.0.5
-  delayed_display: ^2.0.0
   permission_handler: ^11.0.1
+  delayed_tween_animation_builder: ^0.5.1
 
 dev_dependencies:
   flutter_test:

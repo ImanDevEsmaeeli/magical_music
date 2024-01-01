@@ -225,14 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.4"
-  delayed_display:
+  delayed_tween_animation_builder:
     dependency: "direct main"
     description:
-      name: delayed_display
-      sha256: "8d722bb730071b872cef2bc0b07ef20549ebd269087a16ed1c5696896246c296"
+      name: delayed_tween_animation_builder
+      sha256: "683b4f7254d318f274f7274706835a2a03c91b7025a9d84d26cccb4ab2014256"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "0.5.1"
   fake_async:
     dependency: transitive
     description:
@@ -448,14 +448,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
-  like_button:
-    dependency: "direct main"
-    description:
-      name: like_button
-      sha256: "08e6a45b78888412df5d351786c550205ad3a677e72a0820d5bbc0b063c8a463"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   lints:
     dependency: transitive
     description:

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:like_button/like_button.dart';
+
 import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'dart:io' as io;
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
-import 'package:magical_music/design/widgets/listView/listItem/animatedFavoriteIcon.dart';
-import 'package:magical_music/design/widgets/listView/listItem/onLongPressView.dart';
+import 'package:magical_music/design/widgets/listView/listItem/animated_favorite_icon.dart';
+import 'package:magical_music/design/widgets/listView/listItem/on_long_pressview.dart';
 import 'package:open_filex/open_filex.dart';
 
 class ListItem extends StatelessWidget {
@@ -66,21 +66,6 @@ class ListItem extends StatelessWidget {
                   trailing: AnimatedFavoriteIcon(
                     music: music,
                   ),
-
-                  //  IconButton(
-                  //   onPressed: () {
-                  //     musicController.favorite(music);
-                  //   },
-                  //   icon: music.isFavorite
-                  //       ? Icon(
-                  //           Icons.favorite,
-                  //           color: Colors.red.shade400,
-                  //         )
-                  //       : const Icon(
-                  //           Icons.favorite_border_outlined,
-                  //           color: Colors.red,
-                  //         ),
-                  // ),
                   onTap: () async {
                     musicController.selectMusic(music);
                     if (musicController.selectedMusic.musicAddress.isNotEmpty &&
