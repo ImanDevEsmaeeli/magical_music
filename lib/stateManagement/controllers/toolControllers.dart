@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
+import 'package:magical_music/database/models/toolDbModel.dart';
 import 'package:magical_music/database/services/toolDB.dart';
 import 'package:magical_music/tools/enums/bottomNavigationMode.dart';
 import 'package:magical_music/tools/enums/crudMode.dart';
@@ -96,5 +101,29 @@ class ToolController extends GetxController {
 
   String getPath() {
     return _db.getPathDirectory().toString();
+  }
+
+  Future<void> createBackup() async {
+    Map<String, ToolDbModel> map = _db
+        .getDatabaseBox()!
+        .toMap()
+        .map((key, value) => MapEntry(key.toString(), value));
+    String json = jsonEncode(map);
+
+    Directory backUpDir = await _getSaveDirectory();
+
+    String formattedDate = DateTime.now()
+        .toString()
+        .replaceAll('.', '-')
+        .replaceAll(' ', '-')
+        .replaceAll(':', '-');
+    String path = '${backUpDir.path}$formattedDate.toolsbackup';
+    File backupFile = File(path);
+    await backupFile.writeAsString(json);
+  }
+
+  Future<Directory> _getSaveDirectory() async {
+    String? folderPath = await FilePicker.platform.getDirectoryPath();
+    return Directory(folderPath.toString() + "/");
   }
 }

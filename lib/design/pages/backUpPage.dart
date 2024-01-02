@@ -1,14 +1,8 @@
-import 'dart:convert';
-import 'dart:io' as io;
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
-import 'package:path_provider/path_provider.dart';
 
 class BackUpPage extends StatelessWidget {
   BackUpPage({super.key});
@@ -37,7 +31,8 @@ class BackUpPage extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                Get.find<MusicControllers>().createBackup();
+                await Get.find<MusicControllers>().createBackup();
+                await Get.find<ToolController>().createBackup();
 
                 // folderPath = await FilePicker.platform.getDirectoryPath();
                 // List<String> dataBasePath = [];

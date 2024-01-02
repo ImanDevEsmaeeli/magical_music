@@ -19,6 +19,10 @@ class ToolsDB {
     return _box?.path;
   }
 
+  Box<ToolDbModel>? getDatabaseBox() {
+    return _box;
+  }
+
   void add(String category, String id) {
     _db.musicCategory = category;
     _db.id = id;

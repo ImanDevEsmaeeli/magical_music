@@ -7,12 +7,8 @@ import 'package:magical_music/database/models/musicDbModel.dart';
 import 'package:magical_music/database/services/musicDB.dart';
 import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
-import 'package:magical_music/tools/music_converters.dart';
-import 'package:path_provider/path_provider.dart';
 import '../../models/music.dart';
-import 'favoriteMusicController.dart';
 import 'selectionMusicControllers.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MusicControllers extends SelectionMusicControllers {
   MusicDB _db = MusicDB();
@@ -102,48 +98,37 @@ class MusicControllers extends SelectionMusicControllers {
   }
 
   Future<void> createBackup() async {
-    // if (favoriteBooksBox.isEmpty) {
-    //   _scaffoldKey.currentState.showSnackBar(
-    //     SnackBar(content: Text('Pick a favorite book.')),
-    //   );
-    //   return;
-    // }
-    // _scaffoldKey.currentState.showSnackBar(
-    //   SnackBar(content: Text('Creating backup...')),
-    // );
     Map<String, MusicDbModel> map = _db
         .getDatabaseBox()!
         .toMap()
         .map((key, value) => MapEntry(key.toString(), value));
     String json = jsonEncode(map);
 
-    Directory dir = await _getDirectory();
+    Directory backUpDir = await _getSaveDirectory();
 
-    if (await dir.exists()) {
-      // dir = Directory(dir.path + "/");
-      String formattedDate = DateTime.now()
-          .toString()
-          .replaceAll('.', '-')
-          .replaceAll(' ', '-')
-          .replaceAll(':', '-');
-      String path = '${dir.path}$formattedDate.hivebackup';
-      File backupFile = File(path);
-      await backupFile.writeAsString(json);
-    }
-  }
-
-  Future<Directory> _getDirectory() async {
-    Directory? directory = await getExternalStorageDirectory();
-    const String pathExt = '/backups/';
-    Directory newDirectory = Directory(directory!.path + pathExt);
-    if (await newDirectory.exists() == false) {
-      return newDirectory.create(recursive: true);
-    }
-    return newDirectory;
+    // dir = Directory(dir.path + "/");
+    String formattedDate = DateTime.now()
+        .toString()
+        .replaceAll('.', '-')
+        .replaceAll(' ', '-')
+        .replaceAll(':', '-');
+    String path = '${backUpDir.path}$formattedDate.musicbackup';
+    File backupFile = File(path);
+    await backupFile.writeAsString(json);
   }
 
   // Future<Directory> _getDirectory() async {
-  //   String? folderPath = await FilePicker.platform.getDirectoryPath();
-  //   return Directory(folderPath.toString());
+  //   Directory? directory = await pathPro.getExternalStorageDirectory();
+  //   const String pathExt = '/backups/';
+  //   Directory newDirectory = Directory(directory!.path + pathExt);
+  //   if (await newDirectory.exists() == false) {
+  //     return newDirectory.create(recursive: true);
+  //   }
+  //   return newDirectory;
   // }
+
+  Future<Directory> _getSaveDirectory() async {
+    String? folderPath = await FilePicker.platform.getDirectoryPath();
+    return Directory(folderPath.toString() + "/");
+  }
 }
