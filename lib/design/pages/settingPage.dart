@@ -1,153 +1,146 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:magical_music/design/widgets/animated_slider_button.dart';
+import 'package:magical_music/design/widgets/tabbar_view.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 import 'package:magical_music/stateManagement/controllers/musics/musicControllers.dart';
 import 'package:magical_music/stateManagement/controllers/toolControllers.dart';
 import 'package:magical_music/stateManagement/models/music.dart';
 
-class SettingPage extends StatefulWidget {
+class SettingPage extends StatelessWidget {
   List<String> labels = [];
   ToolController tools = ToolController();
   SettingPage() {
     tools = Get.find<ToolController>();
-    labels = tools.getCategories();
+    //labels = tools.getCategories();
   }
 
-  @override
-  State<SettingPage> createState() => _SettingPageState();
-}
-
-class _SettingPageState extends State<SettingPage> {
   String _txt = "";
-
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    //final tools = Provider.of<Tools>(context);
+    //final tools = Get.find<ToolController>();
 
     return Scaffold(
       appBar: AppBar(title: Text("setting")),
+      floatingActionButton: AnimatedSliderButton(
+        addFunc: () {
+          if (_txt.length != 0) {
+            String? isContain = Get.find<ToolController>()
+                .categories
+                .firstWhereOrNull((m) => m == _txt);
+            if (isContain == null) {
+              tools.add(_txt);
+              Get.snackbar(
+                "Successful",
+                "Category $_txt added successfully",
+                backgroundColor: Colors.green.withOpacity(0.8),
+              );
+              _txt = "";
+            } else {
+              Get.snackbar(
+                "Unsuccessful",
+                "category $_txt already exist please change it's name",
+                backgroundColor: Colors.red.withOpacity(0.8),
+                duration: Duration(seconds: 5),
+              );
+            }
+          } else {
+            Get.snackbar(
+              "Unsuccessful",
+              " please enter name",
+              backgroundColor: Colors.red.withOpacity(0.8),
+              duration: Duration(seconds: 4),
+            );
+          }
+        },
+        editFunc: () {
+          String oldName = tools.category;
+          var music = Get.find<MusicControllers>();
+
+          if (_txt.length != 0) {
+            int selectedIndex = tools.categories.indexOf(tools.category);
+            tools.edit(selectedIndex, _txt);
+            List<Music> musics = music.get((m) => m.musicCategory == oldName);
+            for (var item in musics) {
+              item.musicCategory = _txt;
+              music.edit(item);
+            }
+            _txt = "";
+            Get.snackbar(
+              "Successful",
+              "Category $_txt edited successfully",
+              backgroundColor: Colors.green.withOpacity(0.8),
+            );
+          } else {
+            Get.snackbar(
+              "Unsuccessful",
+              " please enter name",
+              backgroundColor: Colors.red.withOpacity(0.8),
+              duration: Duration(seconds: 4),
+            );
+          }
+        },
+        deleteFunc: () {
+          var music = Get.find<MusicControllers>();
+          if (_txt.length != 0) {
+            int selectedIndex = tools.categories.indexOf(tools.category);
+            tools.delete(selectedIndex);
+            List<Music> musics = music.get((m) => m.musicCategory == _txt);
+            for (var item in musics) {
+              music.delete(item);
+            }
+
+            _txt = "";
+            Get.snackbar(
+              "Successful",
+              "Category $_txt delete successfully",
+              backgroundColor: Colors.green.withOpacity(0.8),
+            );
+          } else {
+            Get.snackbar(
+              "Unsuccessful",
+              " please enter name",
+              backgroundColor: Colors.red.withOpacity(0.8),
+              duration: Duration(seconds: 4),
+            );
+          }
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GetBuilder<ToolController>(
-              builder: (ctrl) => SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Wrap(
-                  spacing: 7,
-                  alignment: WrapAlignment.center,
-                  children: List.generate(
-                    ctrl.categories.length,
-                    (index) => ChoiceChip(
-                      label: Text(ctrl.categories[index]),
-                      labelPadding: EdgeInsets.all(7),
-                      labelStyle: TextStyle(
-                        fontSize: (selectedIndex == index) ? 18 : 16,
-                        color: (selectedIndex == index)
-                            ? Colors.white
-                            : Colors.blue,
-                      ),
-                      selected: selectedIndex == index,
-                      selectedColor: Colors.blue,
-                      backgroundColor: Colors.blue.shade50,
-                      side: BorderSide(color: Colors.blue, width: 1),
-                      onSelected: (value) {
-                        setState(() {
-                          selectedIndex = value ? index : selectedIndex;
-                        });
-                        _txt = ctrl.categories[selectedIndex];
-                        ctrl.setCategory(selectedIndex);
-                      },
-                    ),
-                  ),
+        child: GetBuilder<ToolController>(
+          init: ToolController(),
+          initState: (_) {},
+          builder: (ctrl) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TabBarMusic(
+                  func: () {
+                    _txt = ctrl.category;
+                    ctrl.update();
+                  },
                 ),
-              ),
-            ),
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: TextField(
-                        controller: TextEditingController(text: _txt),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          labelText: "Input your category name",
-                        ),
-                        onChanged: (value) {
-                          _txt = value;
-                        },
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, left: 50, right: 50),
+                  child: TextField(
+                    controller: TextEditingController(text: _txt),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
+                      labelText: "Input your category name",
                     ),
+                    onChanged: (value) {
+                      _txt = value;
+                    },
                   ),
-
-                  CrudButtons(
-                    color: Colors.green,
-                    icon: Icons.add,
-                    label: "add",
-                    func: (() {
-                      if (_txt.length != 0) {
-                        String? isContain = Get.find<ToolController>()
-                            .categories
-                            .firstWhereOrNull((m) => m == _txt);
-                        if (isContain == null) {
-                          widget.tools.add(_txt);
-                        }
-                      }
-                    }),
-                  ),
-
-                  CrudButtons(
-                    color: Colors.yellow,
-                    icon: Icons.edit,
-                    label: "edit",
-                    func: (() {
-                      String oldName = widget.tools.category;
-                      var music = Get.find<MusicControllers>();
-
-                      if (_txt.length != 0) {
-                        widget.tools.edit(selectedIndex, _txt);
-                        List<Music> musics =
-                            music.get((m) => m.musicCategory == oldName);
-                        for (var item in musics) {
-                          item.musicCategory = _txt;
-                          music.edit(item);
-                        }
-                      }
-
-                      _txt = "";
-                    }),
-                  ),
-                  //
-                  CrudButtons(
-                    color: Colors.red,
-                    icon: Icons.delete,
-                    label: "delete",
-                    func: (() {
-                      var music = Get.find<MusicControllers>();
-                      if (_txt.length != 0) {
-                        widget.tools.delete(selectedIndex);
-                        List<Music> musics =
-                            music.get((m) => m.musicCategory == _txt);
-                        for (var item in musics) {
-                          music.delete(item);
-                        }
-
-                        _txt = "";
-                      }
-                    }),
-                  ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            );
+          },
         ),
       ),
     );

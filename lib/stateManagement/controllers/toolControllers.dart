@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:magical_music/database/models/toolDbModel.dart';
 import 'package:magical_music/database/services/toolDB.dart';
 import 'package:magical_music/tools/enums/bottomNavigationMode.dart';
 import 'package:magical_music/tools/enums/crudMode.dart';
+
 import 'package:uuid/uuid.dart';
 
 class ToolController extends GetxController {
@@ -20,7 +20,6 @@ class ToolController extends GetxController {
 
   void setCategory(int category) {
     _db.setCategory(category);
-
     update();
   }
 

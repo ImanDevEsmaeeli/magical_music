@@ -31,10 +31,13 @@ class ToolsDB {
   }
 
   void setCategory(int index) {
-    String s = _box!.values.toList()[0].musicCategory;
-    _db.musicCategory = s;
-    _db.index = index;
-    _box?.putAt(0, _db);
+    List<ToolDbModel> tools = _box!.values.toList();
+    for (var tool in tools) {
+      ToolDbModel _dbEdit = ToolDbModel();
+      _dbEdit.musicCategory = tool.musicCategory;
+      _dbEdit.index = index;
+      _box?.putAt(tools.indexOf(tool), _dbEdit);
+    }
   }
 
   List<String> getCategories() {

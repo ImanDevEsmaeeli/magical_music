@@ -52,19 +52,19 @@ class MusicControllers extends SelectionMusicControllers {
     addDB.add(music);
     _items.add(music);
     //_items.refresh();
-    update();
+    update([MusicIds.musicList]);
   }
 
   void delete(Music music) {
     _db.delete(music);
     _items.remove(music);
-    update();
+    update([MusicIds.musicList]);
   }
 
   void edit(Music music) {
     _db.update(music);
     _items[_items.indexWhere((m) => m.id == music.id)] = music;
-    update();
+    update([MusicIds.musicList]);
   }
 
   void favorite(Music music) {
@@ -130,5 +130,29 @@ class MusicControllers extends SelectionMusicControllers {
   Future<Directory> _getSaveDirectory() async {
     String? folderPath = await FilePicker.platform.getDirectoryPath();
     return Directory(folderPath.toString() + "/");
+  }
+
+  Future<void> restoreBackup() async {
+    FilePickerResult? results = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+      allowMultiple: true,
+    );
+    if (results == null) return;
+
+    var ss = results.files[0].extension;
+
+    PlatformFile? music = results.files
+        .firstWhereOrNull((file) => file.extension == "musicbackup");
+    if (music == null) return;
+
+    File musicFile = File(music.path.toString());
+
+    Map<String, dynamic> map =
+        jsonDecode(await musicFile.readAsString()) as Map<String, dynamic>;
+    var mmap = map.map<int, MusicDbModel>(
+        (key, value) => MapEntry(int.parse(key), MusicDbModel.fromJson(value)));
+
+    await _db.getDatabaseBox()!.clear();
+    _db.getDatabaseBox()!.putAll(mmap);
   }
 }

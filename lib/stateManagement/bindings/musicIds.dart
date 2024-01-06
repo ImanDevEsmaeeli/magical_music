@@ -3,4 +3,5 @@ class MusicIds {
   static String favorite = "/favorite";
   static String listItem = "/listItem";
   static String musicList = "/musicList";
+  static String tabBarMusic = "/tabBarMusic";
 }

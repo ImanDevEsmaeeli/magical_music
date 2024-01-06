@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:magical_music/stateManagement/bindings/musicIds.dart';
 
 import '../../models/music.dart';
 
@@ -18,7 +19,7 @@ class SelectionMusicControllers extends GetxController {
 
   void selectMusic(Music music) {
     _selectedMusic = music;
-    update();
+    update([MusicIds.listItem]);
   }
 
   List<Music> _selectedMusics = [];

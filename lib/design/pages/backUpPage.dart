@@ -61,7 +61,9 @@ class BackUpPage extends StatelessWidget {
                   StadiumBorder(),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                await Get.find<MusicControllers>().restoreBackup();
+              },
               icon: SvgPicture.asset("assets/icons/database_import.svg"),
             ),
           ],

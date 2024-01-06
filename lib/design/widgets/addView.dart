@@ -102,7 +102,8 @@ class AddView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: Center(
-                    child: Text("${mode.name} ${_tools.category}"),
+                    child:
+                        Text("${mode.name.capitalizeFirst} ${_tools.category}"),
                   ),
                 ),
                 Padding(
@@ -246,10 +247,22 @@ class AddView extends StatelessWidget {
                                   musicItem.id = Uuid().v1();
                                   musicController.add(musicItem);
                                   Navigator.pop(context, true);
+                                  Get.snackbar(
+                                    "Successful",
+                                    "${musicItem.name} added successfully",
+                                    backgroundColor:
+                                        Colors.green.withOpacity(0.8),
+                                  );
                                   break;
                                 case CrudMode.edit:
                                   musicController.edit(musicItem);
                                   Navigator.pop(context, true);
+                                  Get.snackbar(
+                                    "Successful",
+                                    "${musicItem.name} edited successfully",
+                                    backgroundColor:
+                                        Colors.green.withOpacity(0.8),
+                                  );
                                   break;
                                 default:
                               }
